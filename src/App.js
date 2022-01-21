@@ -1,20 +1,18 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
+import axios from 'axios';
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
 
-  const onClickHandler = () => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=807")
-    .then(res => res.json())
-    .then(res => {
-      console.log(res);
-      setPokemon(res.results);
-    })
-  .catch(err => console.log(err))
-  }
 
+  const onClickHandler = () => {
+    axios.get('https://pokeapi.co/api/v2/pokemon?limit=807')
+        .then(response => {
+            setPokemon(response.data.results)
+        })
+  }
 
   return (
     <div className="App"> 
